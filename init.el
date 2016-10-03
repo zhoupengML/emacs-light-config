@@ -6,10 +6,14 @@
 
 
 (setq frame-title-format "emacs")
+(global-set-key (kbd "C-x C-b") 'ibuffer) 
 
-(menu-bar-mode -1)
+(menu-bar-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+
+(desktop-save-mode t)
+(setq auto-save-default t)
 
 ;;; display a horizontal bar cursor 
 (set-default 'cursor-type 'hollow)
@@ -35,6 +39,24 @@
 ;;; Default MODIFIER is 'shift.
 (windmove-default-keybindings)
 
+;;;*******************************************************************
+;;; Max window size when start emacs.
+;;;*******************************************************************
+(defun my-max-window()
+(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+)
+(run-with-idle-timer 1 nil 'my-max-window)
+;;;*******************************************************************
+;;;*******************************************************************
+;;;*******************************************************************
+
+;;;************************************************************
+;;; Begin install plugin **************************************
+;;;************************************************************
+
 ;;; add repositories to be able to install packages
 (require 'package)
 (add-to-list 'package-archives
@@ -43,6 +65,9 @@
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/")
 	     t)
+(add-to-list 'package-archives
+	     '("melpa-stable" . "http://melpa.org/packages/"))
+
 
 (package-initialize)
 ;; On-demand installation of packages
@@ -105,26 +130,56 @@
 (powerline-vim-theme)
 (setq powerline-default-separator 'wave)
 
-;;;*******************************************************************
-;;; Max window size when start emacs.
-;;;*******************************************************************
-(defun my-max-window()
-(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-)
-(run-with-idle-timer 1 nil 'my-max-window)
-;;;*******************************************************************
-;;;*******************************************************************
-;;;*******************************************************************
-(desktop-save-mode t)
-(setq auto-save-default t)
+;;; vertical show the ido candidate
+(require-package 'ido-vertical-mode)
+(ido-vertical-mode)
+
+;;;------------------------------------------------------------
+;;; save your current opened buffer nad window layout, 
+;;;auto-restore next time
+(require-package 'revive)
+(autoload 'save-current-configuration "revive" "Save status" t)
+(autoload 'resume "revive" "Resume Emacs" t)
+(autoload 'wipe "revive" "Wipe Emacs" t)
+;And define favorite keys to those functions.  Here is a sample.
+(define-key ctl-x-map "S" 'save-current-configuration)
+(define-key ctl-x-map "F" 'resume)
+(define-key ctl-x-map "K" 'wipe)
+;[Sample Operations]
+;C-u 2 C-x S		;save status into the buffer #2
+;C-u 3 C-x F		;load status from the buffer #3
+;;;------------------------------------------------------------
+(require-package 'yasnippet)
+(yas-global-mode t)
+;;;------------------------------------------------------------
+;; (require-package 'helm)
+(require-package 'find-file-in-project)
+(global-set-key (kbd "<f6>") 'find-file-in-project)
+;; Usage,
+;; - `M-x find-file-in-project-by-selected' use the selected region
+;; as the keyword to search file.  Or you need provide the keyword
+;; if no region selected.
+;; - `M-x find-directory-in-project-by-selected' use the select region
+;; to find directory.  Or you need provide the keyword if no region
+;; selected.
+;; - `M-x find-file-in-project' will start search file immediately
+;; - `M-x ffip-create-project-file' create .dir-locals.el
+;;;------------------------------------------------------------
+(require-package 'hydra)
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
+;;;------------------------------------------------------------
+(require-package 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 
 
-
+;;;************************************************************
+;;; End install plugin **************************************
+;;;************************************************************
 
 
 
