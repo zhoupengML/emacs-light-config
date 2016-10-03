@@ -1,6 +1,5 @@
 ;;; black background
 ;;; (disable-theme 'wombat)
-
 ;; (load-theme 'wombat t)
 ;;; change theme
 ;;; M-x package-install monokai-theme
@@ -106,6 +105,21 @@
 (powerline-vim-theme)
 (setq powerline-default-separator 'wave)
 
+;;;*******************************************************************
+;;; Max window size when start emacs.
+;;;*******************************************************************
+(defun my-max-window()
+(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+)
+(run-with-idle-timer 1 nil 'my-max-window)
+;;;*******************************************************************
+;;;*******************************************************************
+;;;*******************************************************************
+
+(desktop-save-mode t)
 
 
 
