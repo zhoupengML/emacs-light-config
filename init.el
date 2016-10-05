@@ -95,6 +95,8 @@
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; (require-package 'auto-complete)
 ;; (ac-config-default)
+
+;;; company
 (require-package 'company)
 ;; (global-company-mode)
 (add-hook 'after-init-hook #'global-company-mode)
@@ -102,6 +104,7 @@
 ;;; flycheck
 (require-package 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;;;  flycheck-ycmd
 (require-package 'flycheck-ycmd)
 (require 'flycheck-ycmd) 		
