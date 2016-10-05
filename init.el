@@ -43,11 +43,11 @@
 ;;; Max window size when start emacs.
 ;;;*******************************************************************
 (defun my-max-window()
-(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-'(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-'(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+  )
 (run-with-idle-timer 1 nil 'my-max-window)
 ;;;*******************************************************************
 ;;;*******************************************************************
@@ -81,10 +81,10 @@
         (package-refresh-contents)
         (require-package package min-version t)))))
 
- (require-package 'monokai-theme)
- (require-package 'auto-complete)
+(require-package 'monokai-theme)
+(require-package 'auto-complete)
 ;;; ''' M-x complete
- (require-package 'smex)
+(require-package 'smex)
 (load-theme 'monokai t)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
@@ -103,8 +103,7 @@
 (require-package 'switch-window)
 (global-set-key (kbd "C-M-z") 'switch-window)
 
-(require-package 'ace-jump-mode)
-(global-set-key (kbd "C->") 'ace-jump-mode)
+
 
 (require-package 'alpha)
 (require 'alpha)
@@ -122,8 +121,8 @@
 (require-package 'minimap)
 
 (require-package 'multiple-cursors)
-(global-set-key (kbd "C-}") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-{") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
 
 ;;; Modify the mode-line at the bottom of the screen.
 (require-package 'powerline)
@@ -141,13 +140,13 @@
 (autoload 'save-current-configuration "revive" "Save status" t)
 (autoload 'resume "revive" "Resume Emacs" t)
 (autoload 'wipe "revive" "Wipe Emacs" t)
-;And define favorite keys to those functions.  Here is a sample.
+					;And define favorite keys to those functions.  Here is a sample.
 (define-key ctl-x-map "S" 'save-current-configuration)
 (define-key ctl-x-map "F" 'resume)
 (define-key ctl-x-map "K" 'wipe)
-;[Sample Operations]
-;C-u 2 C-x S		;save status into the buffer #2
-;C-u 3 C-x F		;load status from the buffer #3
+					;[Sample Operations]
+					;C-u 2 C-x S		;save status into the buffer #2
+					;C-u 3 C-x F		;load status from the buffer #3
 ;;;------------------------------------------------------------
 (require-package 'yasnippet)
 (yas-global-mode t)
@@ -173,6 +172,36 @@
 ;;;------------------------------------------------------------
 (require-package 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+;;;------------------------------------------------------------
+(require-package 'avy)
+(global-set-key (kbd "C->") 'avy-goto-word-or-subword-1)
+;;;------------------------------------------------------------
+(require-package 'writeroom-mode)
+;;;------------------------------------------------------------
+(require-package 'ibuffer-vc)
+(add-hook 'ibuffer-hook
+	  (lambda ()
+	    (ibuffer-vc-set-filter-groups-by-vc-root)
+	    (unless (eq ibuffer-sorting-mode 'alphabetic)
+	      (ibuffer-do-sort-by-alphabetic))))
+;;;------------------------------------------------------------
+(require-package 'flx-ido)
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+;;;------------------------------------------------------------
+;; swap buffers' posotion
+(require-package 'buffer-move)
+;;;------------------------------------------------------------
+(require-package 'multi-term)
+(global-set-key (kbd "<f8>") 'multi-term)
+;;;------------------------------------------------------------
+
+
 
 
 
