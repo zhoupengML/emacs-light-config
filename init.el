@@ -299,12 +299,19 @@
       (concat org-directory "/finished.org")
 ))
 ;;;------------------------------------------------------------
-
+;;; markdown
+;; (require-package 'markdown-mode)
+;;; Open org to makedown transformation 
+;; (eval-after-load "org"
+;;   '(require 'ox-md nil t))
 ;;;------------------------------------------------------------
-
-
-
-
+;;; 
+(require 'dired)
+;; (define-key dired-mode-map
+;;   (kbd "RET") 'dired-find-alternate-file)
+(define-key dired-mode-map
+  (kbd "^") ( lambda ()
+  (interactive) (find-alternate-file "..")))
 
 
 ;;;************************************************************
@@ -316,4 +323,3 @@
 ;;;
 ;;;
 
-(put 'dired-find-alternate-file 'disabled nil)
