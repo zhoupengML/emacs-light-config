@@ -42,6 +42,52 @@
 ;;; Keybindings are of the form MODIFIER-{left,right,up,down}.
 ;;; Default MODIFIER is 'shift.
 (windmove-default-keybindings)
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;; Copy current line without selection
+(defun xah-copy-line-or-region ()
+  "Copy current line, or text selection.
+When called repeatedly, append copy subsequent lines.
+When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
+
+URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+Version 2016-06-18"
+  (interactive)
+  (let (-p1 -p2)
+    (if current-prefix-arg
+        (setq -p1 (point-min) -p2 (point-max))
+      (if (use-region-p)
+          (setq -p1 (region-beginning) -p2 (region-end))
+        (setq -p1 (line-beginning-position) -p2 (line-end-position))))
+    (if (eq last-command this-command)
+        (progn
+          (progn ; hack. exit if there's no more next line
+            (end-of-line)
+            (forward-char)
+            (backward-char))
+          ;; (push-mark (point) "NOMSG" "ACTIVATE")
+          (kill-append "\n" nil)
+          (kill-append (buffer-substring-no-properties (line-beginning-position) (line-end-position)) nil)
+          (message "Line copy appended"))
+      (progn
+        (kill-ring-save -p1 -p2)
+        (if current-prefix-arg
+            (message "Buffer text copied")
+          (message "Text copied"))))
+    (end-of-line)
+    (forward-char)
+    ))
+(global-set-key (kbd "M-w") 'xah-copy-line-or-region)
+
+
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
 ;;;*******************************************************************
 ;;; Max window size when start emacs.
@@ -115,8 +161,8 @@
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
 (set-variable 'ycmd-server-command
-              '("python" "/home/peng/usr/env/ycmd/ycmd"))
-(set-variable 'ycmd-global-config "/home/peng/.ycm_extra_conf.py")
+              '("python" "/home/shhs/usr/soft/ycmd/ycmd"))
+(set-variable 'ycmd-global-config "/home/shhs/.ycm_extra_conf.py")
 (set-variable 'ycmd-extra-conf-whitelist '("please add project .ycm_extra_conf.py"))
 ;;; company-ycmd 
 (require-package 'company-ycmd)
@@ -178,8 +224,8 @@
 (autoload 'save-current-configuration "revive" "Save status" t)
 (autoload 'resume "revive" "Resume Emacs" t)
 (autoload 'wipe "revive" "Wipe Emacs" t)
-					;And define favorite keys to those functions.  Here is a sample.
-(define-key ctl-x-map "S" 'save-current-configuration)
+;And define favorite keys to those functions.  Here is a sample.
+(global-set-key (kbd "C-x S") 'save-current-configuration)
 (define-key ctl-x-map "F" 'resume)
 (define-key ctl-x-map "K" 'wipe)
 					;[Sample Operations]
@@ -257,7 +303,14 @@
 (setq TeX-output-view-style (quote (("^pdf$" "." "evince %o %(outpage)"))))
 ;; set the size of formula in org-mode
 (require 'org)
-(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))  
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+;; org to pdf support Chinese
+;; (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
+;; 			      "xelatex -interaction nonstopmode %f"))
+;; (setq org-latex-default-packages-alist 
+;; (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
+
 ;;;------------------------------------------------------------
 ;;; GTD 日程管理
 (global-set-key (kbd "C-c c")  'remember)
@@ -323,3 +376,4 @@
 ;;;
 ;;;
 
+(put 'dired-find-alternate-file 'disabled nil)
