@@ -1,3 +1,5 @@
+
+
 ;;; black background
 ;;; (disable-theme 'wombat)
 ;; (load-theme 'wombat t)
@@ -7,7 +9,10 @@
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 
-
+;;  ___   _   ___ ___ ___    ___ ___  _  _ ___ ___ ___
+;; | _ ) /_\ / __|_ _/ __|  / __/ _ \| \| | __|_ _/ __|
+;; | _ \/ _ \\__ \| | (__  | (_| (_) | .` | _| | | (_ |
+;; |___/_/ \_\___/___\___|  \___\___/|_|\_|_| |___\___|
 
 (setq frame-title-format "emacs")
 (global-set-key (kbd "C-x C-b") 'ibuffer) 
@@ -42,6 +47,7 @@
 ;;; Keybindings are of the form MODIFIER-{left,right,up,down}.
 ;;; Default MODIFIER is 'shift.
 (windmove-default-keybindings)
+
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -82,11 +88,19 @@ Version 2016-06-18"
 
 
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+;;;------------------------------------------------------------
+;;; 
+(require 'dired)
+;; (define-key dired-mode-map
+;;   (kbd "RET") 'dired-find-alternate-file)
+(define-key dired-mode-map
+  (kbd "^") ( lambda ()
+  (interactive) (find-alternate-file "..")))
+;;;------------------------------------------------------------
 
 
 ;;;*******************************************************************
@@ -106,6 +120,10 @@ Version 2016-06-18"
 ;;;************************************************************
 ;;; Begin install plugin **************************************
 ;;;************************************************************
+;;  ___ _   _   _  ___ ___ _  _
+;; | _ \ | | | | |/ __|_ _| \| |
+;; |  _/ |_| |_| | (_ || || .` |
+;; |_| |____\___/ \___|___|_|\_|
 
 ;;; add repositories to be able to install packages
 (require 'package)
@@ -131,9 +149,19 @@ Version 2016-06-18"
         (package-refresh-contents)
         (require-package package min-version t)))))
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  __  __  ___  _  _  ___  _  __   _   ___
+;; |  \/  |/ _ \| \| |/ _ \| |/ /  /_\ |_ _|
+;; | |\/| | (_) | .` | (_) | ' <  / _ \ | |
+;; |_|  |_|\___/|_|\_|\___/|_|\_\/_/ \_\___|
+
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  ___ __  __ _____  __
+;; / __|  \/  | __\ \/ /
+;; \__ \ |\/| | _| >  <
+;; |___/_|  |_|___/_/\_\
+
 ;;; M-x complete
 (require-package 'smex)
 (global-set-key (kbd "M-x") 'smex)
@@ -141,6 +169,10 @@ Version 2016-06-18"
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; (require-package 'auto-complete)
 ;; (ac-config-default)
+;;   ___ ___  __  __ ___  _   _  ___   __
+;;  / __/ _ \|  \/  | _ \/_\ | \| \ \ / /
+;; | (_| (_) | |\/| |  _/ _ \| .` |\ V /
+;;  \___\___/|_|  |_|_|/_/ \_\_|\_| |_|
 
 ;;; company
 (require-package 'company)
@@ -155,6 +187,11 @@ Version 2016-06-18"
 (require-package 'flycheck-ycmd)
 (require 'flycheck-ycmd) 		
 (flycheck-ycmd-setup)
+;; __   _____ __  __ ___
+;; \ \ / / __|  \/  |   \
+;;  \ V / (__| |\/| | |) |
+;;   |_| \___|_|  |_|___/
+
 ;;; ycmd
 (require-package 'ycmd)
 (require 'ycmd)				; ycmd-parse-conditions
@@ -173,27 +210,49 @@ Version 2016-06-18"
 (global-set-key [(S-f12)] 'ycmd-goto-declaration)
 
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 (require-package 'nlinum)
 (nlinum-mode)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;    _  _   _ _____ ___  ___  _   ___ ___
+;;   /_\| | | |_   _/ _ \| _ \/_\ |_ _| _ \
+;;  / _ \ |_| | | || (_) |  _/ _ \ | ||   /
+;; /_/ \_\___/  |_| \___/|_|/_/ \_\___|_|_\
 
 (require-package 'autopair)
 (autopair-global-mode)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  _   _ _  _ ___   ___    _____ ___ ___ ___
+;; | | | | \| |   \ / _ \  |_   _| _ \ __| __|
+;; | |_| | .` | |) | (_) |   | | |   / _|| _|
+;;  \___/|_|\_|___/ \___/    |_| |_|_\___|___|
 
 (require-package 'undo-tree)
 (global-undo-tree-mode)
 (global-set-key (kbd "M-/") 'undo-tree-visualize)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  _____      _____ _____ ___ _  _  __      _____ _  _
+;; / __\ \    / /_ _|_   _/ __| || | \ \    / /_ _| \| |
+;; \__ \\ \/\/ / | |  | || (__| __ |  \ \/\/ / | || .` |
+;; |___/ \_/\_/ |___| |_| \___|_||_|   \_/\_/ |___|_|\_|
+
 (require-package 'switch-window)
 (global-set-key (kbd "C-M-z") 'switch-window)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;    _   _    ___ _  _   _
+;;   /_\ | |  | _ \ || | /_\
+;;  / _ \| |__|  _/ __ |/ _ \
+;; /_/ \_\____|_| |_||_/_/ \_\
+
 (require-package 'alpha)
 (require 'alpha)
 (global-set-key (kbd "C-M-)") 'transparency-increase)
 (global-set-key (kbd "C-M-(") 'transparency-decrease)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;   ___ ___  _   _   _ __  __ _  _   __  __  ___  ___  ___
+;;  / __/ _ \| | | | | |  \/  | \| | |  \/  |/ _ \|   \| __|
+;; | (_| (_) | |_| |_| | |\/| | .` | | |\/| | (_) | |) | _|
+;;  \___\___/|____\___/|_|  |_|_|\_| |_|  |_|\___/|___/|___|
+
 ;;; The text now will change color when it exceeds a certain character
 ;;; limit.
 (require-package 'column-enforce-mode)
@@ -201,23 +260,47 @@ Version 2016-06-18"
 (global-column-enforce-mode)
 (setq column-enforce-column 70)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  __  __ ___ _  _ ___ __  __   _   ___
+;; |  \/  |_ _| \| |_ _|  \/  | /_\ | _ \
+;; | |\/| || || .` || || |\/| |/ _ \|  _/
+;; |_|  |_|___|_|\_|___|_|  |_/_/ \_\_|
+
 ;;; See a minimap at the side of the screen.
 (require-package 'minimap)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  __  __ _   _ _  _____ ___    ___ _   _ ___  ___  ___  ___
+;; |  \/  | | | | ||_   _|_ _|  / __| | | | _ \/ __|/ _ \| _ \
+;; | |\/| | |_| | |__| |  | |  | (__| |_| |   /\__ \ (_) |   /
+;; |_|  |_|\___/|____|_| |___|  \___|\___/|_|_\|___/\___/|_|_\
+
 (require-package 'multiple-cursors)
 (global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  ___  _____      _____ ___ _    ___ _  _ ___
+;; | _ \/ _ \ \    / / __| _ \ |  |_ _| \| | __|
+;; |  _/ (_) \ \/\/ /| _||   / |__ | || .` | _|
+;; |_|  \___/ \_/\_/ |___|_|_\____|___|_|\_|___|
+
 ;;; Modify the mode-line at the bottom of the screen.
 (require-package 'powerline)
 (powerline-vim-theme)
 (setq powerline-default-separator 'wave)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;  ___ ___   ___   __   _____ ___ _____ ___ ___   _   _
+;; |_ _|   \ / _ \  \ \ / / __| _ \_   _|_ _/ __| /_\ | |
+;;  | || |) | (_) |  \ V /| _||   / | |  | | (__ / _ \| |__
+;; |___|___/ \___/    \_/ |___|_|_\ |_| |___\___/_/ \_\____|
+
 ;;; vertical show the ido candidate
 (require-package 'ido-vertical-mode)
 (ido-vertical-mode)
-
 ;;;------------------------------------------------------------
+;;  ___ _____   _______   _____
+;; | _ \ __\ \ / /_ _\ \ / / __|
+;; |   / _| \ V / | | \ V /| _|
+;; |_|_\___| \_/ |___| \_/ |___|
+
 ;;; save your current opened buffer nad window layout, 
 ;;;auto-restore next time
 (require-package 'revive)
@@ -228,13 +311,23 @@ Version 2016-06-18"
 (global-set-key (kbd "C-x S") 'save-current-configuration)
 (define-key ctl-x-map "F" 'resume)
 (define-key ctl-x-map "K" 'wipe)
-					;[Sample Operations]
-					;C-u 2 C-x S		;save status into the buffer #2
-					;C-u 3 C-x F		;load status from the buffer #3
+;[Sample Operations]
+;C-u 2 C-x S		;save status into the buffer #2
+;C-u 3 C-x F		;load status from the buffer #3
 ;;;------------------------------------------------------------
+;; __   ___   ___ _  _ ___ ___ ___ ___ _____
+;; \ \ / /_\ / __| \| |_ _| _ \ _ \ __|_   _|
+;;  \ V / _ \\__ \ .` || ||  _/  _/ _|  | |
+;;   |_/_/ \_\___/_|\_|___|_| |_| |___| |_|
+
 (require-package 'yasnippet)
 (yas-global-mode t)
 ;;;------------------------------------------------------------
+;;  ___ ___ _  _ ___    ___ ___ _    ___
+;; | __|_ _| \| |   \  | __|_ _| |  | __|
+;; | _| | || .` | |) | | _| | || |__| _|
+;; |_| |___|_|\_|___/  |_| |___|____|___|
+
 ;; (require-package 'helm)
 (require-package 'find-file-in-project)
 (global-set-key (kbd "<f6>") 'find-file-in-project)
@@ -248,20 +341,37 @@ Version 2016-06-18"
 ;; - `M-x find-file-in-project' will start search file immediately
 ;; - `M-x ffip-create-project-file' create .dir-locals.el
 ;;;------------------------------------------------------------
+;;  _  ___   _____  ___    _
+;; | || \ \ / /   \| _ \  /_\
+;; | __ |\ V /| |) |   / / _ \
+;; |_||_| |_| |___/|_|_\/_/ \_\
+
 (require-package 'hydra)
 (defhydra hydra-zoom (global-map "<f2>")
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 ;;;------------------------------------------------------------
-;; (require-package 'flycheck)
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;;;------------------------------------------------------------
+;;    ___   ____   __
+;;   /_\ \ / /\ \ / /
+;;  / _ \ V /  \ V /
+;; /_/ \_\_/    |_|
+
 (require-package 'avy)
 (global-set-key (kbd "C->") 'avy-goto-word-or-subword-1)
 ;;;------------------------------------------------------------
+;; __      _____ ___ _____ ___   __  __  ___  ___  ___
+;; \ \    / / _ \_ _|_   _| __| |  \/  |/ _ \|   \| __|
+;;  \ \/\/ /|   /| |  | | | _|  | |\/| | (_) | |) | _|
+;;   \_/\_/ |_|_\___| |_| |___| |_|  |_|\___/|___/|___|
+
 (require-package 'writeroom-mode)
 ;;;------------------------------------------------------------
+;;  ___ ___ _   _ ___ ___ ___ ___  __   _____
+;; |_ _| _ ) | | | __| __| __| _ \ \ \ / / __|
+;;  | || _ \ |_| | _|| _|| _||   /  \ V / (__
+;; |___|___/\___/|_| |_| |___|_|_\   \_/ \___|
+
 (require-package 'ibuffer-vc)
 (add-hook 'ibuffer-hook
 	  (lambda ()
@@ -278,9 +388,19 @@ Version 2016-06-18"
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
 ;;;------------------------------------------------------------
+;;  ___ _   _ ___ ___ ___ ___   __  __  _____   _____
+;; | _ ) | | | __| __| __| _ \ |  \/  |/ _ \ \ / / __|
+;; | _ \ |_| | _|| _|| _||   / | |\/| | (_) \ V /| _|
+;; |___/\___/|_| |_| |___|_|_\ |_|  |_|\___/ \_/ |___|
+
 ;; swap buffers' posotion
 (require-package 'buffer-move)
 ;;;------------------------------------------------------------
+;;  __  __ _   _ _  _____ ___   _____ ___ ___ __  __
+;; |  \/  | | | | ||_   _|_ _| |_   _| __| _ \  \/  |
+;; | |\/| | |_| | |__| |  | |    | | | _||   / |\/| |
+;; |_|  |_|\___/|____|_| |___|   |_| |___|_|_\_|  |_|
+
 (require-package 'multi-term)
 ;; Close yasnippet in term-mode aim to use tab complete
 (add-hook 'term-mode-hook (lambda()
@@ -288,6 +408,11 @@ Version 2016-06-18"
 (setq multi-term-program "/bin/bash")
 (global-set-key (kbd "<f8>") 'multi-term)
 ;;;------------------------------------------------------------
+;;    _  _   _  ___ _____ _____  __
+;;   /_\| | | |/ __|_   _| __\ \/ /
+;;  / _ \ |_| | (__  | | | _| >  <
+;; /_/ \_\___/ \___| |_| |___/_/\_\
+
 ;; Let emacs load auctex
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
@@ -312,6 +437,11 @@ Version 2016-06-18"
 ;; (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 
 ;;;------------------------------------------------------------
+;;   ___ _____ ___
+;;  / __|_   _|   \
+;; | (_ | | | | |) |
+;;  \___| |_| |___/
+
 ;;; GTD 日程管理
 (global-set-key (kbd "C-c c")  'remember)
 ;; GTD 收集项目的模板设置 
@@ -357,15 +487,19 @@ Version 2016-06-18"
 ;;; Open org to makedown transformation 
 ;; (eval-after-load "org"
 ;;   '(require 'ox-md nil t))
-;;;------------------------------------------------------------
-;;; 
-(require 'dired)
-;; (define-key dired-mode-map
-;;   (kbd "RET") 'dired-find-alternate-file)
-(define-key dired-mode-map
-  (kbd "^") ( lambda ()
-  (interactive) (find-alternate-file "..")))
 
+;;;------------------------------------------------------------
+;;  ___ ___ ___ _    ___ _____
+;; | __|_ _/ __| |  | __|_   _|
+;; | _| | | (_ | |__| _|  | |
+;; |_| |___\___|____|___| |_|
+;;; Insert asic picture
+;; sudo apt-get install figlet
+;;Have a look at `figlet-comment', `figlet-figletify-region' and
+;;`figlet-figletify-region-comment'.
+(require-package 'figlet)
+
+;;;------------------------------------------------------------
 
 ;;;************************************************************
 ;;; End install plugin **************************************
