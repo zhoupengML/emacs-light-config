@@ -1,5 +1,11 @@
 
 
+
+(setq *is-a-mac* (eq system-type 'darwin))
+
+
+(add-to-list 'load-path "/usr/local/Cellar/auctex/11.89/share/emacs/site-lisp/auctex")
+
 ;;; black background
 ;;; (disable-theme 'wombat)
 ;; (load-theme 'wombat t)
@@ -99,13 +105,15 @@ Version 2016-06-18"
 ;;;*******************************************************************
 ;;; Max window size when start emacs.
 ;;;*******************************************************************
-(defun my-max-window()
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  )
-(run-with-idle-timer 1 nil 'my-max-window)
+
+
+;; (defun my-max-window()
+;;   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;; 			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+;;   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;; 			 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+;;   )
+;; (run-with-idle-timer 1 nil 'my-max-window)
 ;;;*******************************************************************
 
 ;;;************************************************************
@@ -182,6 +190,10 @@ Version 2016-06-18"
 ;; \ \ / / __|  \/  |   \
 ;;  \ V / (__| |\/| | |) |
 ;;   |_| \___|_|  |_|___/
+;;  __  __          __   __           _
+;; |  \/  |__ _ __  \ \ / /_ _ __  __| |
+;; | |\/| / _` / _|  \ V / _| '  \/ _` |
+;; |_|  |_\__,_\__|   |_|\__|_|_|_\__,_|
 
 ;;; ycmd
 (require-package 'ycmd)
@@ -189,8 +201,8 @@ Version 2016-06-18"
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
 (set-variable 'ycmd-server-command
-              '("python" "/home/shhs/usr/soft/ycmd/ycmd"))
-(set-variable 'ycmd-global-config "/home/shhs/.ycm_extra_conf.py")
+              '("python" "/Users/peng/usr/ycmd/ycmd/"))
+(set-variable 'ycmd-global-config "~/.ycm_extra_conf.py")
 (set-variable 'ycmd-extra-conf-whitelist '("please add project .ycm_extra_conf.py"))
 ;;; company-ycmd 
 (require-package 'company-ycmd)
@@ -199,6 +211,7 @@ Version 2016-06-18"
 
 (global-set-key [(f12)] 'ycmd-goto-definition)
 (global-set-key [(S-f12)] 'ycmd-goto-declaration)
+
 
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 (require-package 'nlinum)
@@ -403,21 +416,31 @@ Version 2016-06-18"
 ;;   /_\| | | |/ __|_   _| __\ \/ /
 ;;  / _ \ |_| | (__  | | | _| >  <
 ;; /_/ \_\___/ \___| |_| |___/_/\_\
-
-;; Let emacs load auctex
+;; mac auctex
+(setenv "PATH" (concat "/usr/texbin:/usr/local/bin:" (getenv "PATH")))
+(setq exec-path (append '("/usr/texbin" "/usr/local/bin") exec-path))
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
 
-(add-hook 'LaTeX-mode-hook
-(lambda()
-(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-(setq TeX-command-default "XeLaTeX")))
+(require-package 'auctex)
 
-(setq TeX-output-view-style (quote (("^pdf$" "." "evince %o %(outpage)"))))
-;; set the size of formula in org-mode
+(add-hook 'LaTeX-mode-hook 
+          (lambda () 
+	    (LaTeX-mod t)
+            (turn-on-reftex) 
+            (setq reftex-plug-into-AUCTeX t))) 
+(setq TeX-PDF-mode t) 
+(setq TeX-view-program-selection 
+      '(((output-dvi style-pstricks) 
+         "dvips and PDF Viewer") 
+        (output-dvi "PDF Viewer") 
+        (output-pdf "PDF Viewer") 
+        (output-html "Safari"))) 
+(setq TeX-view-program-list 
+      '(("dvips and PDF Viewer" "%(o?)dvips %d -o && open %f") 
+        ("PDF Viewer" "open %o") 
+        ("Safari" "open %o"))) 
+
 (require 'org)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 
@@ -436,7 +459,9 @@ Version 2016-06-18"
 ;;; GTD 日程管理
 (global-set-key (kbd "C-c c")  'remember)
 ;; GTD 收集项目的模板设置 
-(org-remember-insinuate)
+(require 'remember)
+
+;; (org-remember-insinuate)
 (setq org-directory "~/usr/notes/GTD")
 
 (setq org-remember-templates '(
@@ -450,10 +475,18 @@ Version 2016-06-18"
       (list "TODO(t)" "|" "CANCELED(c)" "DONE(d)"))
 ;; 将项目转接在各文件之间，方便清理和回顾。
 (custom-set-variables
-'(org-refile-targets
-  (quote
-   (("inbox.org" :level . 1)("canceled.org" :level . 1) ("finished.org":level . 1))
-)))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-refile-targets
+   (quote
+    (("inbox.org" :level . 1)
+     ("canceled.org" :level . 1)
+     ("finished.org" :level . 1))))
+ '(package-selected-packages
+   (quote
+    (auctex figlet yasnippet writeroom-mode undo-tree switch-window smex revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project company-ycmd column-enforce-mode buffer-move avy autopair alpha))))
 ;; 快速打开inbox
 (defun inbox() (interactive) (find-file org-default-notes-file))
 (global-set-key "\C-cz" 'inbox)
@@ -491,6 +524,8 @@ Version 2016-06-18"
 (require-package 'figlet)
 
 ;;;------------------------------------------------------------
+(require-package 'maxframe) 
+(add-hook 'window-setup-hook 'maximize-frame t)
 
 ;;;************************************************************
 ;;; End install plugin **************************************
@@ -502,3 +537,9 @@ Version 2016-06-18"
 ;;;
 
 (put 'dired-find-alternate-file 'disabled nil)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
