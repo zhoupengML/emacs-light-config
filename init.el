@@ -444,12 +444,13 @@ Version 2016-06-18"
 (require 'org)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 
-;; org to pdf support Chinese
-;; (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
-;; 			      "xelatex -interaction nonstopmode %f"))
-;; (setq org-latex-default-packages-alist 
-;; (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
+;;org to pdf support Chinese
+(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
+			      "xelatex -interaction nonstopmode %f"))
+(setq org-latex-default-packages-alist 
+(remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 
+;;(add-to-list 'org-latex-packages-alist '("UTF8" "ctex"))
 ;;;------------------------------------------------------------
 ;;   ___ _____ ___
 ;;  / __|_   _|   \
@@ -457,18 +458,39 @@ Version 2016-06-18"
 ;;  \___| |_| |___/
 
 ;;; GTD 日程管理
-(global-set-key (kbd "C-c c")  'remember)
+;;For org8
+(global-set-key (kbd "C-c c")  'org-capture)
 ;; GTD 收集项目的模板设置 
 (require 'remember)
+;; emaca org 8.0
+(require 'org-capture)
 
-;; (org-remember-insinuate)
+;; (org-capture-insinuate)
 (setq org-directory "~/usr/notes/GTD")
 
-(setq org-remember-templates '(
-("Task" ?t "** TODO %? %t\n %i\n" (concat org-directory "/inbox.org") "Tasks")
-("Book" ?b "** %? %t\n %i\n" (concat org-directory "/inbox.org") "Book")
-("Calendar" ?c "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Calender")
-("Project" ?p "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Project")))
+;; For org<8
+;; (setq org-capture-templates '(
+;; ("Task" ?t "** TODO %? %t\n %i\n" (concat org-directory "/inbox.org") "Tasks")
+;; ("Book" ?b "** %? %t\n %i\n" (concat org-directory "/inbox.org") "Book")
+;; ("Calendar" ?c "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Calender")
+;; ("Project" ?p "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Project")))
+
+;; For org8
+(setq org-capture-templates
+      '(
+	("t" "Task" entry (file+headline (concat org-directory "/inbox.org") "Tasks")
+	 "* TODO %? %t\n  %i\n  ")
+	("b" "Book" entry (file+headline (concat org-directory "/inbox.org") "Book")
+	 "* %? %t\n  %i\n  ")	 
+	("c" "Calendar" entry (file+headline (concat org-directory "/inbox.org") "Calendar")
+	 "* %? %t\n  %i\n  ")	 
+	("p" "Project" entry (file+headline (concat org-directory "/inbox.org") "Project")
+	 "* %? %t\n  %i\n  ")	 
+
+        ("j" "Journal" entry (file+datetree (concat org-directory "/inbox.org"))
+	 "* %? %t\n  %i\n  ")	 
+	))
+
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;;设置TODO关键字
 (setq org-todo-keywords
@@ -486,7 +508,7 @@ Version 2016-06-18"
      ("finished.org" :level . 1))))
  '(package-selected-packages
    (quote
-    (auctex figlet yasnippet writeroom-mode undo-tree switch-window smex revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project company-ycmd column-enforce-mode buffer-move avy autopair alpha))))
+    (org-rtm auctex figlet yasnippet writeroom-mode undo-tree switch-window smex revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project company-ycmd column-enforce-mode buffer-move avy autopair alpha))))
 ;; 快速打开inbox
 (defun inbox() (interactive) (find-file org-default-notes-file))
 (global-set-key "\C-cz" 'inbox)
