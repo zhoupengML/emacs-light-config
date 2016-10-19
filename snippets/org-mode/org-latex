@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: begin
+# key: begin_
+# --
+\begin{${1:macro}}
+
+\end{$1}

@@ -422,6 +422,8 @@ Version 2016-06-18"
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 
+
+
 (require-package 'auctex)
 
 (add-hook 'LaTeX-mode-hook 
@@ -443,6 +445,10 @@ Version 2016-06-18"
 
 (require 'org)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((latex . t)))
 
 ;;org to pdf support Chinese
 (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
