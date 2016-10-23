@@ -511,10 +511,7 @@ Version 2016-06-18"
    (quote
     (("inbox.org" :level . 1)
      ("canceled.org" :level . 1)
-     ("finished.org" :level . 1))))
- '(package-selected-packages
-   (quote
-    (org-rtm auctex figlet yasnippet writeroom-mode undo-tree switch-window smex revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project company-ycmd column-enforce-mode buffer-move avy autopair alpha))))
+     ("finished.org" :level . 1)))))
 ;; 快速打开inbox
 (defun inbox() (interactive) (find-file org-default-notes-file))
 (global-set-key "\C-cz" 'inbox)
