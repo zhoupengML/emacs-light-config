@@ -5,12 +5,16 @@
 \documentclass{${1:article}}
 %\usepackage[UTF8, heading = false, scheme = plain]{ctex}
 \usepackage{hyperref}
+\usepackage{fullpage}
 
 \begin{document}
 \title{${2:Latex 支持中文}}
 \author{${3:Zhou Peng}\\\\ \href{mailto:${4:zhoupengcv@qq.com}}{$4}}
 \date{${5:\today}}
 \maketitle
+\tableofcontents{}
+\newpage
+
 
 \section{${6:sec1}}
 \label{sec:${7:sec1}}
