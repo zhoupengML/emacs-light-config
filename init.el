@@ -201,7 +201,7 @@ Version 2016-06-18"
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
 (set-variable 'ycmd-server-command
-              '("python" "/Users/peng/usr/ycmd/ycmd/"))
+              '("/Users/peng/anaconda2/bin/python" "/Users/peng/usr/ycmd/ycmd/"))
 (set-variable 'ycmd-global-config "~/.ycm_extra_conf.py")
 (set-variable 'ycmd-extra-conf-whitelist '("please add project .ycm_extra_conf.py"))
 ;;; company-ycmd 
@@ -209,8 +209,8 @@ Version 2016-06-18"
 (require 'company-ycmd)
 (company-ycmd-setup)
 
-(global-set-key [(f12)] 'ycmd-goto-definition)
-(global-set-key [(S-f12)] 'ycmd-goto-declaration)
+(global-set-key [(f9)] 'ycmd-goto-definition)
+(global-set-key [(S-f9)] 'ycmd-goto-declaration)
 
 
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -518,7 +518,7 @@ Version 2016-06-18"
      ("finished.org" :level . 1))))
  '(package-selected-packages
    (quote
-    (yasnippet writeroom-mode undo-tree switch-window smex rtm revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project figlet company-ycmd column-enforce-mode buffer-move avy autopair auctex alpha))))
+    (ipython yasnippet writeroom-mode undo-tree switch-window smex rtm revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project figlet company-ycmd column-enforce-mode buffer-move avy autopair auctex alpha))))
 ;; 快速打开inbox
 (defun inbox() (interactive) (find-file org-default-notes-file))
 (global-set-key "\C-cz" 'inbox)
@@ -556,8 +556,26 @@ Version 2016-06-18"
 (require-package 'figlet)
 
 ;;;------------------------------------------------------------
+;;  __  __   _   __  _____ ___    _   __  __ ___
+;; |  \/  | /_\  \ \/ / __| _ \  /_\ |  \/  | __|
+;; | |\/| |/ _ \  >  <| _||   / / _ \| |\/| | _|
+;; |_|  |_/_/ \_\/_/\_\_| |_|_\/_/ \_\_|  |_|___|
+
 (require-package 'maxframe) 
 (add-hook 'window-setup-hook 'maximize-frame t)
+;;;------------------------------------------------------------
+;;  ___ _    _____   __
+;; | __| |  | _ \ \ / /
+;; | _|| |__|  _/\ V /
+;; |___|____|_|   |_|
+
+;; (require-package 'elpy)
+;; (elpy-enable)
+;; (elpy-use-ipython)
+
+;;(setq python-shell-interpreter "ipython")
+
+
 
 ;;;************************************************************
 ;;; End install plugin **************************************
@@ -565,13 +583,5 @@ Version 2016-06-18"
 
 
 (provide 'init)
-;;;
-;;;
 
-(put 'dired-find-alternate-file 'disabled nil)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
