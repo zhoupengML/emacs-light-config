@@ -446,6 +446,10 @@ Version 2016-06-18"
 (require 'org)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 
+;; org resize images
+;;(setq org-image-actual-width '(200))
+
+
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
 ;;  '((latex . t)))
@@ -511,7 +515,10 @@ Version 2016-06-18"
    (quote
     (("inbox.org" :level . 1)
      ("canceled.org" :level . 1)
-     ("finished.org" :level . 1)))))
+     ("finished.org" :level . 1))))
+ '(package-selected-packages
+   (quote
+    (yasnippet writeroom-mode undo-tree switch-window smex rtm revive powerline popup nlinum multiple-cursors multi-term monokai-theme minimap maxframe ido-vertical-mode ibuffer-vc hydra flycheck-ycmd flx-ido find-file-in-project figlet company-ycmd column-enforce-mode buffer-move avy autopair auctex alpha))))
 ;; 快速打开inbox
 (defun inbox() (interactive) (find-file org-default-notes-file))
 (global-set-key "\C-cz" 'inbox)

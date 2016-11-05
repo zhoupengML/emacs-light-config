@@ -3,7 +3,7 @@
 # key: fig2
 # --
 %\usepackage{subcaption}
-\begin{figure}[ht]
+\begin{figure}[!htb]
 \centering
 \begin{subfigure}{${1:.5}\textwidth}
   \centering
