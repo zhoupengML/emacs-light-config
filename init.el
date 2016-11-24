@@ -262,7 +262,7 @@ Version 2016-06-18"
 (require-package 'column-enforce-mode)
 (column-enforce-mode)
 (global-column-enforce-mode)
-(setq column-enforce-column 70)
+(setq column-enforce-column 85)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;  __  __ ___ _  _ ___ __  __   _   ___
 ;; |  \/  |_ _| \| |_ _|  \/  | /_\ | _ \
@@ -585,3 +585,4 @@ Version 2016-06-18"
 (provide 'init)
 
 
+(put 'dired-find-alternate-file 'disabled nil)
