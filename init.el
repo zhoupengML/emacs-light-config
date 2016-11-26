@@ -496,6 +496,8 @@ Version 2016-06-18"
 	 "* %? %t\n  %i\n  ")	 
 	("p" "Project" entry (file+headline (concat org-directory "/inbox.org") "Project")
 	 "* %? %t\n  %i\n  ")	 
+	("i" "Idea" entry (file+headline (concat org-directory "/inbox.org") "Idea")
+	 "* %? %t\n  %i\n  ")	 
 
         ("j" "Journal" entry (file+datetree (concat org-directory "/inbox.org"))
 	 "* %? %t\n  %i\n  ")	 
