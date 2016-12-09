@@ -321,7 +321,7 @@ Version 2016-06-18"
 
 ;; (require-package 'helm)
 (require-package 'find-file-in-project)
-(global-set-key (kbd "<f6>") 'find-file-in-project)
+(global-set-key (kbd "<f7>") 'find-file-in-project)
 ;; Usage,
 ;; - `M-x find-file-in-project-by-selected' use the selected region
 ;; as the keyword to search file.  Or you need provide the keyword
@@ -443,7 +443,8 @@ Version 2016-06-18"
 ("Task" ?t "** TODO %? %t\n %i\n" (concat org-directory "/inbox.org") "Tasks")
 ("Book" ?b "** %? %t\n %i\n" (concat org-directory "/inbox.org") "Book")
 ("Calendar" ?c "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Calender")
-("Project" ?p "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Project")))
+("Project" ?p "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Project")
+("Idea" ?i "** %? %t\n %i\n " (concat org-directory "/inbox.org") "Idea")))
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 ;;设置TODO关键字
 (setq org-todo-keywords
