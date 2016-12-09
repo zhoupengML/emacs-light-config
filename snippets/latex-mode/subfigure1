@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: subfig1
+# key: subfig1
+# --
+\begin{subfigure}[t]{${1:.5}\textwidth}
+  \centering
+  \includegraphics[width=${4:0.9}\textwidth]{${2:path.pdf}}
+  \setcaptionwidth{$4\textwidth}
+  \caption{${3:sub-figure-1}}
+  \label{subfig:$2}
+\end{subfigure}%

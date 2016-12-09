@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: beamer
+# key: beamer
+# --
+\documentclass{beamer}
+
+% \usetheme{Warsaw}
+% \usetheme{CambridgeUS}
+% \usetheme{Berkeley}
+% \usetheme{Antibes}
+% \usetheme{Madrid}
+\usetheme{Boadilla}
+
+\begin{document}
+\title{${1:title}}
+\author{Peng Zhou}
+\date{}
+\maketitle{}
+
+\begin{frame}
+  \frametitle{${2:frame-title}}
+%  \href{https://people.eecs.berkeley.edu/~rbg/papers/pami/rcnn_pami.pdf}
+%  {Region-based Convolution Networks for Accurate Object detection and Segmentation}
+
+  \begin{enumerate}
+
+  \item Area selection
+    \begin{itemize}
+    \item The sliding window strategy is used to traverse the whole image. 
+    \item The sliding windows have different scale, different aspect ratio.
+    \item Too many redundant windows, high time complexity
+    \end{itemize}
+
+ \end{enumerate}
+\end{frame}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+
+
+
+
+
+
+
+

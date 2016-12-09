@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: figure side by side : minipage
+# key: fig3
+# --
+%\usepackage{subcaption}
+\begin{figure}[ht]
+\centering
+\begin{minipage}{${1:.5}\textwidth}
+  \centering
+  \includegraphics[width=.9\textwidth]{${2:path.pdf}}
+  \captionof{figure}{${3:}}
+  \label{subfig:${4:}}
+\end{minipage}%
+\begin{minipage}{${5:.5}\textwidth}
+  \centering
+  \includegraphics[width=.9\textwidth]{${6:path.pdf}}
+  \captionof{figure}{${7:}}
+  \label{subfig:${8:}}
+\end{minipage}
+\end{figure}

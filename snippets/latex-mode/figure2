@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: figure side by side : subfigure
+# key: fig2
+# --
+%\usepackage{subcaption}
+\begin{figure}[!htb]
+\centering
+\begin{subfigure}[t]{${1:.5}\textwidth}
+  \centering
+  \includegraphics[width=${9:0.9}\textwidth]{${2:path.pdf}}
+  \setcaptionwidth{$9\textwidth}
+  \caption{${3:sub-figure-1}}
+  \label{subfig:$2}
+\end{subfigure}%
+\begin{subfigure}[t]{${4:.5}\textwidth}
+  \centering
+  \includegraphics[width=$9\textwidth]{${5:path.pdf}}
+  \setcaptionwidth{$9\textwidth}
+  \caption{${6:sub-figure-2}}
+  \label{subfig:$5}
+\end{subfigure}
+\caption{${7:figure-caption}}
+\label{fig:${8:}}
+\end{figure}
+
