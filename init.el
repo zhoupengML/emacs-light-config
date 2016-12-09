@@ -334,7 +334,7 @@ Version 2016-06-18"
 
 ;; (require-package 'helm)
 (require-package 'find-file-in-project)
-(global-set-key (kbd "<f6>") 'find-file-in-project)
+(global-set-key (kbd "<f7>") 'find-file-in-project)
 ;; Usage,
 ;; - `M-x find-file-in-project-by-selected' use the selected region
 ;; as the keyword to search file.  Or you need provide the keyword
@@ -442,6 +442,12 @@ Version 2016-06-18"
       '(("dvips and PDF Viewer" "%(o?)dvips %d -o && open %f") 
         ("PDF Viewer" "open %o") 
         ("Safari" "open %o"))) 
+;; Compile tex file
+(defun tex-compile-command()
+(interactive)
+(TeX-command-master)
+)
+(global-set-key (kbd "<f6>") 'tex-compile-command)
 
 (require 'org)
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))

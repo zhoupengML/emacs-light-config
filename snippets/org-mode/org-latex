@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: begin
-# key: begin_
+# key: begin
 # --
 \begin{${1:macro}}
 
