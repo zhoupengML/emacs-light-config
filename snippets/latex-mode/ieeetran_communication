@@ -1,0 +1,72 @@
+# -*- mode: snippet -*-
+# name: ieeetran_communication
+# key: ieeetran_communication
+# --
+\documentclass[journal,comsoc]{IEEEtran}
+%\usepackage[UTF8, heading = false, scheme = plain]{ctex}
+%Put IEEEtran.cls in the same directory
+\usepackage[T1]{fontenc}% optional T1 font encoding
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\interdisplaylinepenalty=2500
+\usepackage[cmintegrals]{newtxmath}
+\hyphenation{op-tical net-works semi-conduc-tor}
+\makeatletter
+    \setlength\@fptop{0\p@}
+\makeatother
+
+\begin{document}
+\title{${1:title}}
+\author{Zhou~Peng,~\IEEEmembership{016034910052,~SEIEE~5-321,}}
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+\IEEEPARstart{E}{xample} 
+
+% \section{Related Work}
+% \label{sec:related work}
+
+\section{${2:section}}
+\label{sec:$2}
+
+\subsection{${3:subsection}}
+\label{subsec:$3}
+
+\section{Experiment}
+\label{sec:experiment}
+
+\section{Conclusion}
+
+\section*{Acknowledgment}
+
+
+\begin{thebibliography}{1}
+\bibitem{wavelet}
+  Chang, S. Grace, Bin Yu, and Martin Vetterli. "Image denoising via lossy compression and wavelet thresholding."
+  Image Processing, 1997. Proceedings., International Conference on. Vol. 1. IEEE, 1997.
+
+\end{thebibliography}
+
+
+% \begin{IEEEbiographynophoto}{Zhou Peng}
+% received his bachelor degree from UESTC.He is now studying for a PhD in SJTU.
+% \end{IEEEbiographynophoto}
+
+\vfill
+
+\end{document}
+
+
