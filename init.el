@@ -48,6 +48,13 @@
 ;;; Default MODIFIER is 'shift.
 (windmove-default-keybindings)
 
+;;; Hightlight *.cu file 
+(setq auto-mode-alist (append
+                  '(("\\.cu$" . c++-mode))
+                    auto-mode-alist))
+;;; Doxymacs doxygen
+(add-hook 'c-mode-common-hook 'doxymacs-mode)
+
 ;;  __  __  __      __
 ;; |  \/  | \ \    / /
 ;; | |\/| |  \ \/\/ /
@@ -249,7 +256,7 @@ Version 2016-06-18"
 (require-package 'column-enforce-mode)
 (column-enforce-mode)
 (global-column-enforce-mode)
-(setq column-enforce-column 70)
+(setq column-enforce-column 90)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;  __  __ ___ _  _ ___ __  __   _   ___
 ;; |  \/  |_ _| \| |_ _|  \/  | /_\ | _ \
