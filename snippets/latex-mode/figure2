@@ -20,6 +20,6 @@
   \label{subfig:$5}
 \end{subfigure}
 \caption{${7:figure-caption}}
-\label{fig:${8:}}
+\label{fig:$7}
 \end{figure}
 
