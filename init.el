@@ -264,10 +264,10 @@ Version 2016-06-18"
 
 ;;; The text now will change color when it exceeds a certain character
 ;;; limit.
-(require-package 'column-enforce-mode)
-(column-enforce-mode)
-(global-column-enforce-mode)
-(setq column-enforce-column 85)
+;; (require-package 'column-enforce-mode)
+;; (column-enforce-mode)
+;; (global-column-enforce-mode)
+;; (setq column-enforce-column 85)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;  __  __ ___ _  _ ___ __  __   _   ___
 ;; |  \/  |_ _| \| |_ _|  \/  | /_\ | _ \
