@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: pd
+# key: pd
+# --
+"""
+ ${1:Description}
+
+Parameters:
+----------
+ ${2:args} : ${3:type}
+ ${4:Description of args}	  
+ $5
+Returns:
+----------
+ ${6:returns} 
+"""
