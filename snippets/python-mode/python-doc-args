@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: args
+# key: args
+# --
+ ${1:args} : ${2:type}
+     ${3:description}
+ $4

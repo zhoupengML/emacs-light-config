@@ -52,6 +52,9 @@
 (setq auto-mode-alist (append
                   '(("\\.cu$" . c++-mode))
                     auto-mode-alist))
+;;; Open yas-minor-mode when open an .py file
+(add-hook 'python-mode (lambda ()
+			 (yas-minor-mode t)))
 ;;; Doxymacs doxygen
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
 
@@ -233,8 +236,8 @@ Version 2016-06-18"
 ;; \__ \\ \/\/ / | |  | || (__| __ |  \ \/\/ / | || .` |
 ;; |___/ \_/\_/ |___| |_| \___|_||_|   \_/\_/ |___|_|\_|
 
-(require-package 'switch-window)
-(global-set-key (kbd "C-M-z") 'switch-window)
+;; (require-package 'switch-window)
+;; (global-set-key (kbd "C-M-z") 'switch-window)
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;    _   _    ___ _  _   _
 ;;   /_\ | |  | _ \ || | /_\
