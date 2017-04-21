@@ -214,8 +214,8 @@ Version 2016-06-18"
 (require 'company-ycmd)
 (company-ycmd-setup)
 
-(global-set-key [(f9)] 'ycmd-goto-definition)
-(global-set-key [(S-f9)] 'ycmd-goto-declaration)
+(global-set-key [(f5)] 'ycmd-goto-definition)
+(global-set-key [(S-f5)] 'ycmd-goto-declaration)
 
 
 ;;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -341,7 +341,7 @@ Version 2016-06-18"
 
 ;; (require-package 'helm)
 (require-package 'find-file-in-project)
-(global-set-key (kbd "<f7>") 'find-file-in-project)
+(global-set-key (kbd "<f4>") 'find-file-in-project)
 ;; Usage,
 ;; - `M-x find-file-in-project-by-selected' use the selected region
 ;; as the keyword to search file.  Or you need provide the keyword
@@ -417,7 +417,7 @@ Version 2016-06-18"
 (add-hook 'term-mode-hook (lambda()
         (setq yas-dont-activate t)))
 (setq multi-term-program "/bin/bash")
-(global-set-key (kbd "<f8>") 'multi-term)
+(global-set-key (kbd "<f3>") 'multi-term)
 ;;;------------------------------------------------------------
 ;;    _  _   _  ___ _____ _____  __
 ;;   /_\| | | |/ __|_   _| __\ \/ /
